@@ -23,15 +23,15 @@ struct IntroView: View {
              icon: "globe"),
         Step(number: 2,
              title: "Enter your text",
-             description: "Type or paste any medical text you want",
+             description: "Type or paste your medical text",
              icon: "pencil"),
         Step(number: 3,
              title: "Choose audience & tone",
-             description: "Select who will read it and how it should sound",
+             description: "Tailor text to your reader and style",
              icon: "person.2.fill"),
         Step(number: 4,
              title: "Get optimised text",
-             description: "Generate and copy your perfectly adapted text",
+             description: "Generate perfectly adapted text",
              icon: "sparkles")
     ]
 
@@ -64,7 +64,7 @@ struct IntroView: View {
                         .foregroundColor(Color.gray.opacity(0.8))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 20)
-                        .padding(.bottom, 32) // Added padding here
+                        .padding(.bottom, 42) // Added padding here
                 }
                 .opacity(descriptionOpacity)
                 .padding(.top, 20)
@@ -151,21 +151,20 @@ struct IntroView: View {
         .background(Color(uiColor: .systemBackground))
         .onAppear {
             print("Debug: Title opacity starting value: \(titleOpacity)")
-            
-            withAnimation(.easeOut(duration: 0.6)) {
+
+            withAnimation(.easeOut(duration: 0.4)) {
                 titleOpacity = 1
-                print("Debug: Title opacity animated to: \(titleOpacity)")
             }
 
-            withAnimation(.easeOut(duration: 0.6).delay(0.3)) {
+            withAnimation(.easeOut(duration: 0.4).delay(0.2)) {
                 descriptionOpacity = 1
             }
 
-            withAnimation(.easeOut(duration: 0.6).delay(0.6)) {
+            withAnimation(.easeOut(duration: 0.4).delay(0.4)) {
                 stepsOpacity = 1
             }
 
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.9)) {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.8).delay(0.6)) {
                 buttonOpacity = 1
             }
         }

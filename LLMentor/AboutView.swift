@@ -13,52 +13,87 @@ struct AboutView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                // App Info Section
-                Section {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text(appVersion)
-                            .foregroundColor(.gray)
-                    }
-                    
-                    Link(destination: URL(string: "mailto:info@pharmatools.ai")!) {
+            VStack(spacing: 16) {
+                // Main List Content
+                List {
+                    // App Info Section
+                    Section {
                         HStack {
-                            Text("Contact")
+                            Text("Version")
                             Spacer()
-                            Text("info@pharmatools.ai")
+                            Text(appVersion)
                                 .foregroundColor(.gray)
                         }
-                    }
-                } header: {
-                    Text("App Info")
-                }
-                
-                // Legal Section
-                Section {
-                    NavigationLink {
-                        AboutPrivacyView()
-                    } label: {
-                        Text("Privacy Policy")
+                        
+                        Link(destination: URL(string: "mailto:info@pharmatools.ai")!) {
+                            HStack {
+                                Text("Contact")
+                                Spacer()
+                                Text("info@pharmatools.ai")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    } header: {
+                        Text("App Info")
                     }
                     
-                    NavigationLink {
-                        AboutTermsView()
-                    } label: {
-                        Text("Terms of Use")
+                    // Legal Section
+                    Section {
+                        NavigationLink {
+                            AboutPrivacyView()
+                        } label: {
+                            Text("Privacy Policy")
+                        }
+                        
+                        NavigationLink {
+                            AboutTermsView()
+                        } label: {
+                            Text("Terms of Use")
+                        }
+                    } header: {
+                        Text("Legal")
                     }
-                } header: {
-                    Text("Legal")
+                    
+                    // Credits Section
+                    Section {
+                        Link("PharmaTools.AI", destination: URL(string: "https://pharmatools.ai")!)
+                        Text("© 2024 PharmaTools.AI")
+                    } header: {
+                        Text("Credits")
+                    }
                 }
+                .listStyle(InsetGroupedListStyle())
                 
-                // Credits Section
-                Section {
-                    Link("PharmaTools.AI", destination: URL(string: "https://pharmatools.ai")!)
-                    Text("© 2024 PharmaTools.AI")
-                } header: {
-                    Text("Credits")
+                /// Footer with Logo and Tagline
+                VStack(spacing: 4) { // Tighter spacing for closer alignment
+                    // Logo positioned at the top of the footer
+                    Link(destination: URL(string: "https://pharmatools.ai")!) {
+                        Image("pharmatools-logo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 160, height: 160)
+                            .padding(.bottom, 4) // Small space below the logo
+                    }
+
+                    // Tagline immediately below the logo
+                    Text("Empowering Pharma and MedComms with AI Solutions")
+                        .font(.system(size: 16, weight: .semibold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.primary)
+
+                    // Hyperlink to explore tools, with some separation below tagline
+                    Text("Explore more tools on PharmaTools.AI")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                        .padding(.top, 8) // Space between tagline and link
+                        .onTapGesture {
+                            if let url = URL(string: "https://pharmatools.ai") {
+                                UIApplication.shared.open(url)
+                            }
+                        }
                 }
+                .padding(.top, 16) // Space above the footer section
+                .padding(.bottom, 20) // Space below the entire footer
             }
             .navigationTitle("About")
             .navigationBarTitleDisplayMode(.inline)

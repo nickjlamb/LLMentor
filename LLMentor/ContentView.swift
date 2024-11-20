@@ -99,6 +99,7 @@ struct ToastView: View {
 struct ContentView: View {
     @State private var showIntro = false
     @State private var showAbout = false  // Add this at the top with other @State vars
+    @State private var showFeedback = false  // Add this state variable
     @State private var selectedLanguage = "English"
     @State private var inputText = ""
     @State private var selectedAudience = "Adult patient"
@@ -432,6 +433,12 @@ struct ContentView: View {
                                                 Image(systemName: "questionmark.circle")
                                                     .foregroundColor(Color.bluePrimary)
                                             }
+                                            Button(action: {
+                                                showFeedback = true  // Show feedback page
+                                            }) {
+                                                Image(systemName: "bubble.left.and.bubble.right")
+                                                    .foregroundColor(Color.bluePrimary)
+                                            }
                                         }
                                     )
                                     .sheet(isPresented: $showIntro) {
@@ -442,6 +449,9 @@ struct ContentView: View {
                                     .sheet(isPresented: $showAbout) {
                                         AboutView()
                                     }
+                                    .sheet(isPresented: $showFeedback) {  // Add this sheet presentation for the feedback page
+                                        FeedbackView()
+                                    }
                                     }
                                 }
                             }
@@ -450,3 +460,4 @@ struct ContentView: View {
                    #Preview {
                        ContentView()
                    }
+
